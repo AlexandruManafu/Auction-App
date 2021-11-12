@@ -1,0 +1,5 @@
+<ul>
+    <li  *ngFor="let buttonName of this.buttons">
+        <button type="button" (click) = "this.display(buttonName)" >{{buttonName}}</button>
+    </li>
+</ul> 
