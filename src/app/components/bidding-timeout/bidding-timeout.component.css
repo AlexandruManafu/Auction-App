@@ -1,0 +1,18 @@
+.counterText{
+    position:absolute;
+    display: inline;
+    font-weight: 900;
+    font-size:larger;
+    font-style: italic;
+}
+
+.counterBorder{
+    margin-top: 5ex;
+    margin-left: 15%;
+    border: 0.1ex solid #1C1C1C;
+    border-radius: 5px;
+    padding-left: 2ex;
+    padding-right: 2ex;
+    padding-top: 2ex;
+    padding-bottom: 2ex;
+}

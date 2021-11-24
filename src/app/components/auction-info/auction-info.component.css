@@ -1,0 +1,31 @@
+.auctionImage{
+    width: 100%;
+    height: 40ex;
+}
+.auctionTitle{
+    font-weight:normal;
+    color:#333399;
+    margin-top: 1ex;
+    text-align: center;
+}
+.auctionDescription{
+    font-weight:normal;
+    margin-top: 1ex;
+    margin-left: 5%;
+    margin-right: 5%;
+}
+.auctionDate{
+    color: gray;
+    font-weight:lighter;
+    font-style: italic;
+    margin-top: 2ex;
+    margin-left: 10%;
+}
+.auctionBorder{
+    border: 0.1ex solid #1C1C1C;
+    width: 50ex;
+    border-radius: 3px;
+    margin-right: 5ex;
+    margin-top: 5ex;
+    display: inline-block;
+}

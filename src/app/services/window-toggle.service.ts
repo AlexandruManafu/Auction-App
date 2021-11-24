@@ -29,9 +29,6 @@ export class WindowToggleService {
       this.windowToDisplay = newValue;
       //notify component to change what to display
       this.changeMessage(newValue);
-
-
-
     }
   }
 }
