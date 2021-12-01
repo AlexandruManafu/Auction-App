@@ -10,8 +10,14 @@ import { WindowToggleService } from './services/window-toggle.service';
 import { CreateAuctionComponent } from './components/create-auction/create-auction.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { LoginComponent } from './components/login/login.component';
-import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { AuctionPreviewComponent } from './components/auction-preview/auction-preview.component';
+import { FormsModule } from '@angular/forms';
+import { BiddingWindowComponent } from './components/bidding-window/bidding-window.component';
+import { AuctionSelectService } from './services/auction-select.service';
+import { AuctionInfoComponent } from './components/auction-info/auction-info.component';
+import { BiddingTimeoutComponent } from './components/bidding-timeout/bidding-timeout.component';
+import { BiddingService } from './services/bidding.service';
 
 @NgModule({
   declarations: [
@@ -21,15 +27,21 @@ import { HttpClientModule } from '@angular/common/http';
     AuctionsWindowComponent,
     CreateAuctionComponent,
     ProfileComponent,
-    LoginComponent
+    LoginComponent,
+    AuctionPreviewComponent,
+    BiddingWindowComponent,
+    AuctionInfoComponent,
+    BiddingTimeoutComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule
+
   ],
-  providers: [WindowToggleService],
+  providers: [WindowToggleService, AuctionSelectService,BiddingService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

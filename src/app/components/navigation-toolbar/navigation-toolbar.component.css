@@ -3,25 +3,50 @@ ul {
     margin: 0;
     padding: 0;
     background-color: #333333;
-    position: fixed;
     top: 0;
     width: 100%;
+
     
   }
   li {
     display: inline;
-    margin-left: 13%;
+    margin-left: 10%;
   }
 
-  button{
+  .menuButtonShape{
     padding: 0;
     padding-left: 1ex;
     padding-right: 1ex;
-    padding-bottom: 0.3ex;
-    padding-top: 0.3ex;
+    padding-top: 0.5ex;
+    padding-bottom: 0.5ex;
     border: none;
     background: none;
     font-size: 3ex;
     color: white;
     background-color: #B8860B;
+
+  }
+
+  .menuButtonBottomMargin{
+    margin-bottom: 0.5ex
+  }
+
+  #navSpace{
+    height: 2ex;
+    width: 100%;
+    background-color: #333333;
+  }
+
+  @media screen and (max-width: 750px)
+  {
+    li {
+      margin-left: 5ex;
+    }
+  }
+
+  @media screen and (max-width: 600px)
+  {
+    li {
+      display: block;
+    }
   }
