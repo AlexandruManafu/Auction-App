@@ -10,6 +10,12 @@ import { WindowToggleService } from './services/window-toggle.service';
 import { CreateAuctionComponent } from './components/create-auction/create-auction.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { LoginComponent } from './components/login/login.component';
+import { AuctionPreviewComponent } from './components/auction-preview/auction-preview.component';
+import { FormsModule } from '@angular/forms';
+import { BiddingWindowComponent } from './components/bidding-window/bidding-window.component';
+import { AuctionSelectService } from './services/auction-select.service';
+import { AuctionInfoComponent } from './components/auction-info/auction-info.component';
+import { BiddingTimeoutComponent } from './components/bidding-timeout/bidding-timeout.component';
 
 @NgModule({
   declarations: [
@@ -19,13 +25,18 @@ import { LoginComponent } from './components/login/login.component';
     AuctionsWindowComponent,
     CreateAuctionComponent,
     ProfileComponent,
-    LoginComponent
+    LoginComponent,
+    AuctionPreviewComponent,
+    BiddingWindowComponent,
+    AuctionInfoComponent,
+    BiddingTimeoutComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule
   ],
-  providers: [WindowToggleService],
+  providers: [WindowToggleService, AuctionSelectService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

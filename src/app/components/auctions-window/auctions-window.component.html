@@ -1,1 +1,11 @@
-<p>auctions-window works!</p>
+<div id="auctions">
+<br>
+<input  [(ngModel)]="searchParameter" name = "searchParameter" id = auctionsSearchBar type="text" placeholder="Search..">
+<button id = "auctionSearchButton" type="submit" (click) = "onSearchConfirm()" >Search</button>
+<br>
+
+<app-auction-preview
+*ngFor="let element of auctions" [previewObject] = "element"
+></app-auction-preview>
+
+</div>
