@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { WindowToggleService } from 'src/app/services/window-toggle.service';
 
 @Component({
@@ -6,15 +7,20 @@ import { WindowToggleService } from 'src/app/services/window-toggle.service';
   templateUrl: './active-window.component.html',
   styleUrls: ['./active-window.component.css']
 })
-export class ActiveWindowComponent implements OnInit {
+export class ActiveWindowComponent implements OnInit,OnDestroy{
 
   activeWindow:string = "";
+  activeWindowSub! : Subscription;
 
   constructor(private windowToggle: WindowToggleService) { }
   
   ngOnInit(): void {
-    this.windowToggle.currentMessage.subscribe(message => this.activeWindow = message)
+    this.activeWindowSub = this.windowToggle.currentMessage.subscribe(message => this.activeWindow = message)
     console.log("Created component")
+  }
+
+  ngOnDestroy() {
+    this.activeWindowSub.unsubscribe();
   }
 
 }

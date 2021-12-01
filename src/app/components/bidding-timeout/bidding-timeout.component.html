@@ -1,1 +1,9 @@
-<div class = "counterBorder counterText">{{count}}</div>
+
+
+<div class="alignTimer">
+
+    <p *ngIf="!auctionContinuing" class = "counterText">Auction Didn't Start Yet</p>
+    <div *ngIf="count>0" class = "counterBorder counterTime">{{count}}</div>
+    <p *ngIf="count < 0" class = "counterText">Auction Is Over</p>
+
+</div>

@@ -1,18 +1,34 @@
-.counterText{
+.counterTime{
     position:absolute;
     display: inline;
     font-weight: 900;
     font-size:larger;
     font-style: italic;
+    text-align: center;
 }
 
 .counterBorder{
-    margin-top: 5ex;
-    margin-left: 15%;
+    margin-top: 20%;
+    margin-left: 25%;
     border: 0.1ex solid #1C1C1C;
     border-radius: 5px;
     padding-left: 2ex;
     padding-right: 2ex;
     padding-top: 2ex;
     padding-bottom: 2ex;
+}
+
+.counterText{
+    position: absolute;
+    display: inline;
+    font-weight: 900;
+    font-size:larger;
+    text-align: center;
+    
+}
+
+.alignTimer{
+    padding-left: 15%;
+    width: 100%;
+    height: 100%;
 }
