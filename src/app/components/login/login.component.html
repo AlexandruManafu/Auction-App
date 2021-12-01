@@ -1,1 +1,18 @@
-<p>login works!</p>
+<div id="panel">
+    <form id="loginForm" (ngSubmit)="login()" #loginForm="ngForm">
+        <div class="padding_bottom">
+            <p id="welcome">
+                Login
+            </p>
+        </div>
+        <div class='padding_bottom'>
+            <input [(ngModel)]="username" type="text" name="username " class="inputs" placeholder="username" required>
+        </div>
+        <div class='padding_bottom'>
+            <input [(ngModel)]="password" type="password" name="password" class="inputs" placeholder="password" required>
+        </div>
+        <div class='padding_bottom'>
+            <input type="submit" name="submit" placeholder="submit">
+        </div>
+    </form>
+</div>

@@ -1,5 +1,65 @@
 /* You can add global styles to this file, and also import other style files */
+
 body {
     margin: 0;
     padding: 0;
-  }
+}
+
+.marginLeft {
+    margin-left: 5ex;
+}
+
+#panel {
+    margin: 0px auto;
+    width: 45%;
+    margin-top: 100px;
+    background: white;
+    border-radius: 4px;
+    box-shadow: rgba(60, 66, 87, 0.12) 0px 7px 14px 0px, rgba(0, 0, 0, 0.12) 0px 3px 6px 0px;
+}
+
+#panel input {
+    position: relative;
+    display: block;
+    margin: 0 auto;
+    font-size: 16px;
+    padding: 8px 16px;
+    width: 55%;
+    height: 30%;
+    border: unset;
+    border-radius: 4px;
+    outline-color: rgb(84 105 212 / 0.5);
+    background-color: rgb(255, 255, 255);
+    box-shadow: rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(60, 66, 87, 0.16) 0px 0px 0px 1px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px;
+}
+
+#panel .padding_bottom {
+    padding-bottom: 24px;
+}
+
+#panel input[type='submit'] {
+    background-color: rgb(84, 105, 212);
+    box-shadow: rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0.12) 0px 1px 1px 0px, rgb(84, 105, 212) 0px 0px 0px 1px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(60, 66, 87, 0.08) 0px 2px 5px 0px;
+    color: #fff;
+    width: 50%;
+    position: relative;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+#panel #welcome {
+    padding-top: 10%;
+    text-align: center;
+    display: block;
+    font-size: xx-large;
+    color: rgb(84, 105, 212);
+}
+
+@media only screen and (max-width: 600px) {
+    #panel {
+        width: 80%;
+    }
+    #panel #welcome {
+        font-size: larger;
+    }
+}

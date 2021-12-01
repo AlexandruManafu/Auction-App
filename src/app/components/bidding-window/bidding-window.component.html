@@ -1,17 +1,17 @@
-<app-auction-info ></app-auction-info>
+<div class="marginLeft">
+    <app-auction-info></app-auction-info>
 
-<div class="alignTimerForm">
+    <div class="alignTimerForm">
 
-    <app-bidding-timeout ></app-bidding-timeout>
+        <app-bidding-timeout></app-bidding-timeout>
 
-    <div class="biddingFormBorder">
-        <p class = "bidLeftMargin">Current Bid: {{minimumBid}}</p>
-        <input name = "bidInput" [(ngModel)]="bidAmount" class = "bidLeftMargin"
-         type="number" placeholder="Bid Amount">
+        <div class="biddingFormBorder">
+            <p class="bidLeftMargin">Current Bid: {{minimumBid}}</p>
+            <input name="bidInput" [(ngModel)]="bidAmount" class="bidLeftMargin" type="number" placeholder="Bid Amount">
 
-        <button [disabled]="!validBid()" (click)="onBid()" >Place Bid</button>
-        <p class = "bidLeftMargin">Enter a bid that is at least 2% bigger</p>
+            <button [disabled]="!validBid()" (click)="onBid()">Place Bid</button>
+            <p class="bidLeftMargin">Enter a bid that is at least 2% bigger</p>
+        </div>
+
     </div>
-
 </div>
-

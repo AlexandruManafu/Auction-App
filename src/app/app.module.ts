@@ -10,6 +10,7 @@ import { WindowToggleService } from './services/window-toggle.service';
 import { CreateAuctionComponent } from './components/create-auction/create-auction.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { LoginComponent } from './components/login/login.component';
+import { HttpClientModule } from '@angular/common/http';
 import { AuctionPreviewComponent } from './components/auction-preview/auction-preview.component';
 import { FormsModule } from '@angular/forms';
 import { BiddingWindowComponent } from './components/bidding-window/bidding-window.component';
@@ -35,7 +36,10 @@ import { BiddingService } from './services/bidding.service';
   imports: [
     BrowserModule,
     AppRoutingModule,
+    FormsModule,
+    HttpClientModule,
     FormsModule
+
   ],
   providers: [WindowToggleService, AuctionSelectService,BiddingService],
   bootstrap: [AppComponent]

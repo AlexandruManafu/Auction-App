@@ -1,11 +1,9 @@
-<div id="auctions">
-<br>
-<input  [(ngModel)]="searchParameter" name = "searchParameter" id = auctionsSearchBar type="text" placeholder="Search..">
-<button id = "auctionSearchButton" type="submit" (click) = "onSearchConfirm()" >Search</button>
-<br>
+<div class="marginLeft">
+    <br>
+    <input [(ngModel)]="searchParameter" name="searchParameter" id=a uctionsSearchBar type="text" placeholder="Search..">
+    <button id="auctionSearchButton" type="submit" (click)="onSearchConfirm()">Search</button>
+    <br>
 
-<app-auction-preview
-*ngFor="let element of auctions" [previewObject] = "element"
-></app-auction-preview>
+    <app-auction-preview *ngFor="let element of auctions" [previewObject]="element"></app-auction-preview>
 
 </div>

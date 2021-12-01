@@ -1,18 +1,16 @@
-.alignTimerForm{
+.alignTimerForm {
     position: absolute;
     display: inline-block;
     width: 40ex;
     background-color: #bebebe;
     margin-left: 1%;
     margin-top: 1%;
-
     padding-left: 5ex;
     padding-right: 5ex;
     padding-bottom: 3ex;
 }
 
-.biddingFormBorder
-{
+.biddingFormBorder {
     display: inline-block;
     height: 20ex;
     width: 100%;
@@ -21,15 +19,12 @@
     border-radius: 1ex;
 }
 
-.bidLeftMargin{
+.bidLeftMargin {
     margin-left: 10%;
 }
 
-@media screen and (max-width: 770px)
-{
-    .alignTimerForm
-    {
+@media screen and (max-width: 770px) {
+    .alignTimerForm {
         display: block;
     }
-
 }
