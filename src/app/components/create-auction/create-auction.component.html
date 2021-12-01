@@ -1,1 +1,33 @@
-<p>create-auction works!</p>
+<div id="panel">
+    <form id="auction_form" (ngSubmit)="create_auction()" #auction_form="ngForm">
+        <div class="padding_bottom">
+            <p id="welcome">
+                Create Auction
+            </p>
+        </div>
+        <div class='padding_bottom'>
+            <input [(ngModel)]="auction_title" type="text" name="auction_title " placeholder="Auction title" required>
+        </div>
+        <div class='padding_bottom'>
+            <input [(ngModel)]="starting_price" type="text" name="starting_price" placeholder="Starting price" required>
+        </div>
+        <div class='padding_bottom'>
+            <input [(ngModel)]="timeout" type="text" name="timeout" placeholder="Timeout (in seconds)" required>
+        </div>
+        <div class='padding_bottom'>
+            <input [(ngModel)]="category" type="text" name="category" placeholder="Category" required>
+        </div>
+        <div class='padding_bottom'>
+            <input [(ngModel)]="start_date" type="datetime-local" name="start_date" placeholder="Start Date" required>
+        </div>
+        <div class='padding_bottom'>
+            <input [(ngModel)]="item_description" type="text" name="item_description" placeholder="Item description">
+        </div>
+        <div class='padding_bottom'>
+            <input #imageInput (change)="handleFileSelect(imageInput)" type="file" accept="image/*" name="upload_picture" placeholder="Upload a picture">
+        </div>
+        <div class='padding_bottom'>
+            <input type="submit" name="submit" placeholder="submit">
+        </div>
+    </form>
+</div>
