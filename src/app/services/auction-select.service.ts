@@ -15,7 +15,7 @@ export class AuctionSelectService {
 
   getTargetAuction() : AuctionDetails | undefined
   {
-    let auctions : AuctionDetails[] = this.auctionMock.getAuctions();
+    let auctions : AuctionDetails[] = this.auctionMock.auctions;
     for(let i = 0 ; i<auctions.length;i=i+1)
     {
       if(auctions[i].auctionPreview.id == this.targetAuctionId)
@@ -24,5 +24,16 @@ export class AuctionSelectService {
 
     return undefined;
     
+  }
+
+  overrideTargetAuction(newAuction:AuctionDetails): void
+  {
+    let auctions : AuctionDetails[] = this.auctionMock.auctions;
+    for(let i = 0 ; i<auctions.length;i=i+1)
+    {
+      if(auctions[i].auctionPreview.id == this.targetAuctionId)
+        auctions[i] = newAuction;
+    }
+
   }
 }

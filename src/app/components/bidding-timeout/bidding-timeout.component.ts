@@ -1,4 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { AuctionDetails } from 'src/app/objects/AuctionDetails';
+import { AuctionSelectService } from 'src/app/services/auction-select.service';
+import { BiddingService } from 'src/app/services/bidding.service';
 
 @Component({
   selector: 'app-bidding-timeout',
@@ -7,38 +10,61 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class BiddingTimeoutComponent implements OnInit {
 
-  @Input() startSeconds:number = 0; 
-  public count:number = 0;
 
-  constructor() { }
+  constructor(private auctionSelect: AuctionSelectService,
+              private bidding: BiddingService) { }
+
+  private auction : AuctionDetails = this.auctionSelect.getTargetAuction()!;
+  public count:number = 0;
+  public auctionContinuing = true;
 
   ngOnInit(): void {
-    if(this.startSeconds>0)
+
+    if(this.count>= 0)
     {
-      this.count = this.startSeconds;
       this.doCountdown();
     }
+    else
+    {
+      this.count = 0
+    }
 
+  }
+  ngOnDestroy()
+  {
+    this.count = -1;
+  }
+
+  // The Starting time for the counter in seconds
+  // is the integer part of expectedEnd - currentTime / 1000
+  processCount()
+  {
+    console.log(this.count);
+    if(this.count < 0)
+    {
+      this.bidding.changeCanBidMessage(false);
+    }
+    else
+    {
+      let rightNow : Date = new Date;
+      this.auctionContinuing = this.auction.isContinuing(rightNow);
+
+      if(this.auctionContinuing)
+        this.bidding.changeCanBidMessage(true);
+
+      this.count = this.auction.getRemainingTime(rightNow);
+      this.doCountdown();
+    }
   }
 
   doCountdown()
   {
     setTimeout(
       ()=>{
-        this.count = this.count-1;
-        this.updateTimer()
       
+      this.processCount();
     }, 1000) //Every second execute above
   }
-
-  updateTimer()
-  {
-    console.log(this.count)
-    if(this.count==0)
-    {
-      //Stops the setTimeout
-    }else
-      this.doCountdown();
-  }
+  
 
 }

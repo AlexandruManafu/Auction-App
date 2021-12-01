@@ -16,6 +16,7 @@ import { BiddingWindowComponent } from './components/bidding-window/bidding-wind
 import { AuctionSelectService } from './services/auction-select.service';
 import { AuctionInfoComponent } from './components/auction-info/auction-info.component';
 import { BiddingTimeoutComponent } from './components/bidding-timeout/bidding-timeout.component';
+import { BiddingService } from './services/bidding.service';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,7 @@ import { BiddingTimeoutComponent } from './components/bidding-timeout/bidding-ti
     AppRoutingModule,
     FormsModule
   ],
-  providers: [WindowToggleService, AuctionSelectService],
+  providers: [WindowToggleService, AuctionSelectService,BiddingService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
