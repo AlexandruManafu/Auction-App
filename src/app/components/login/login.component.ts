@@ -1,5 +1,6 @@
-import { HttpService } from 'src/app/services/http-client.service';
 import { Component, OnInit } from '@angular/core';
+import { LoginService } from 'src/app/services/login.service';
+import { NavigationService } from 'src/app/services/navigation.service';
 
 
 @Component({
@@ -10,22 +11,20 @@ import { Component, OnInit } from '@angular/core';
 
 export class LoginComponent implements OnInit {
 
+  constructor(private navigation: NavigationService, private loginService : LoginService) { }
+
   username:string="";
   password:string="";
-  posts : any;
-  
-  login() {
-    this.httpService.post({username: this.username, password: this.password, action: 'login'}, 'http://192.168.0.105:80/Auction-App/index.php').subscribe(
-        (response) => { this.posts = response; 
-          console.log(response);
-        },
-        (error) => { console.log(error); });
-  }
-
-  constructor(private httpService: HttpService) { }
 
   ngOnInit(): void {
 
+  }
+
+  login()
+  {
+    this.loginService.login(this.username,this.password);
+    this.username = "";
+    this.password = "";
   }
 
 }
