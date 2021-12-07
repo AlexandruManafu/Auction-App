@@ -22,6 +22,7 @@ function login($username, $password) {
 }
 
 function logout() {
+	echo "here";
     logOutFromCache('logged_users.json', $_SERVER['REMOTE_ADDR']);
 }
 

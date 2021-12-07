@@ -1,4 +1,4 @@
-import { HttpService } from 'src/app/services/http-client.service';
+import { HttpClientService } from 'src/app/services/http-client.service';
 import { Component, OnInit } from '@angular/core';
 import { WindowToggleService } from 'src/app/services/window-toggle.service';
 
@@ -18,17 +18,10 @@ export class CreateAuctionComponent implements OnInit {
   posts : any;
   image_as_base64:string = "";
 
-  constructor(private httpService: HttpService, private windowToggle : WindowToggleService) { }
+  constructor(private httpService: HttpClientService, private windowToggle : WindowToggleService) { }
 
   ngOnInit(): void {
-    this.httpService.post({action: 'islogged'}, 'http://192.168.0.105:80/Auction-App/index.php?action=true').subscribe(
-        (response) => { 
-          console.log(response);
-          if (response.body == 'no') {
-            this.windowToggle.setWhatToDisplay('Login');
-          }
-        },
-        (error) => { console.log(error); });
+    
   }
 
   handleFileSelect(imageInput: any){
@@ -56,7 +49,7 @@ export class CreateAuctionComponent implements OnInit {
       start_date: this.start_date,
       item_description: this.item_description,
       image: this.image_as_base64, action: 'create_auction'}, 
-        'http://192.168.0.105:80/Auction-App/index.php').subscribe(
+        'http://192.168.0.192:80/Auction-App/index.php').subscribe(
           (response) => { this.posts = response; 
             console.log(response);
           },

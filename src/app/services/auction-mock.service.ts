@@ -26,14 +26,14 @@ export class AuctionMockService {
     (0,"/assets/images/pexels-photo-277460.jpeg","Auction0", new Date, "Pocket Watch");
 
     let details1:BiddingDetails = new BiddingDetails
-    ("Placeholder Description for the Pocket Watch asd fgh jkl zxc cbcvb",20,1000)
+    ("Placeholder Description for the Pocket Watch asd fgh jkl zxc cbcvb",40,1000)
 
     let auction1 = new AuctionDetails(preview1,details1);
 
     let preview2:AuctionPreviewObject = new AuctionPreviewObject
     (1,"/assets/images/pexels-photo-277460.jpeg","Gold Necklace", new Date, "Jewelry");
 
-    preview2.date.setSeconds(preview2.date.getSeconds() + 100);
+    preview2.date.setSeconds(preview2.date.getSeconds() + 20);
 
     let auction2 = new AuctionDetails(preview2,this.deepCopy(details1));
 
