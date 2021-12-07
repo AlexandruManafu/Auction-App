@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnChanges, OnDestroy, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
+import { LoginService } from 'src/app/services/login.service';
+import { NavigationService } from 'src/app/services/navigation.service';
 import { WindowToggleService } from 'src/app/services/window-toggle.service';
 
 @Component({
@@ -6,19 +9,30 @@ import { WindowToggleService } from 'src/app/services/window-toggle.service';
   templateUrl: './navigation-toolbar.component.html',
   styleUrls: ['./navigation-toolbar.component.css']
 })
-export class NavigationToolbarComponent implements OnInit {
+export class NavigationToolbarComponent implements OnInit,OnDestroy {
 
-  constructor(private windowToggle : WindowToggleService) { }
+  buttons :string[]=[]
 
-  buttons:string[] = ["Auctions", "Create Auction", "Profile", "Login"];
+  constructor(public navigation:NavigationService, private loginService : LoginService) { }
 
   ngOnInit(): void {
+    this.buttons = this.navigation.buttons;
   }
 
-  display(windowName: string): void
-  {
-    this.windowToggle.setWhatToDisplay(windowName);
-    console.log("Clicked on button: "+windowName);
+  ngOnDestroy(): void{
+    
   }
+
+  display(action: string)
+  {
+    if(action=="Logout")
+    {
+      this.loginService.logout();
+    }
+    else
+      this.navigation.display(action);
+  }
+  
+  
 
 }

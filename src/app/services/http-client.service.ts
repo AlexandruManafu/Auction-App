@@ -6,7 +6,7 @@ import { map } from 'rxjs/operators';
 providedIn:  'root'
 })
 
-export class HttpService {
+export class HttpClientService {
 
 constructor(private http: HttpClient) { }
 
