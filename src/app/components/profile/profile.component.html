@@ -1,1 +1,25 @@
-<p>profile works!</p>
+<div id="panel">
+    <table>
+        <tr>
+            <td colspan="2" class="label">Name: </td>
+            <td colspan="2">{{username}}</td>
+        </tr>
+        <tr><td><br></td></tr>
+
+        <tr>
+            <td  colspan="3"  class="label">Money: {{money}}</td>
+            <td  colspan="1" ><button>+</button></td>
+        </tr>
+        <tr><td><br></td></tr>
+        <tr>
+            <td colspan="2"><input type="text" placeholder="Add money"></td>
+            <td colspan="2"><input type="submit" value="Add" id="add_money"></td>
+        </tr>
+        <tr><td><br></td></tr>
+        <tr *ngFor="let auctions of auctionsMatrix">
+            <td *ngFor="let element of auctions" colspan="4"> 
+                <app-auction-preview  [previewObject]="element"></app-auction-preview>
+            </td>
+        </tr>
+    </table>
+</div>

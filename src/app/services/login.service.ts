@@ -17,11 +17,9 @@ export class LoginService {
      'http://192.168.0.192:80/Auction-App/index.php').subscribe(
         (response) => { posts = response; 
           console.log(response);
-          if (response.body == 'loginto do' || response.body == 'login') {
-            this.setUser(username)
+          this.setUser(username);
             this.navigation.display("LoginAction");
             this.navigation.display("Auctions");
-          }
         },
         (error) => { console.log(error); });
   }
@@ -45,6 +43,11 @@ export class LoginService {
     localStorage.setItem("user",  user);
   }
 
+  public getUser() : string | null
+  {
+    return localStorage.getItem("user");
+  }
+
   public unsetUser(): void
   {
     localStorage.removeItem("user");
@@ -52,24 +55,7 @@ export class LoginService {
 
   public isLoggedInLocal(): boolean
   {
-    let result = localStorage.getItem("user") 
-    return result != null;
+    return this.getUser() != null;
   }
-
-  public isLoggedInRemote() : boolean
-  {
-    let result:boolean = false;
-
-    this.httpService.post({action: 'islogged'},
-     'http://192.168.0.192:80/Auction-App/index.php?action=true').subscribe(
-        (response) => { 
-          console.log(response);
-          if (response.body == 'yes') {
-            result = true;
-          }
-        },
-        (error) => { console.log(error); });
-
-    return result;
-  }
+  
 }

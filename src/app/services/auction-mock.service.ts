@@ -1,14 +1,12 @@
 import { Injectable } from '@angular/core';
-import { AuctionDetails } from '../objects/AuctionDetails';
-import { AuctionPreviewObject } from '../objects/AuctionPreviewObject';
-import { BiddingDetails } from '../objects/BiddingDetails';
+import { AuctionObject } from '../objects/AuctionObject';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuctionMockService {
 
-  auctions:AuctionDetails[] = [];
+  auctions:AuctionObject[] = [];
 
   constructor() {
     this.buildAuctions();
@@ -19,37 +17,25 @@ export class AuctionMockService {
     return JSON.parse(JSON.stringify(object));
   }
 
-
   public buildAuctions()
   {
-    let preview1:AuctionPreviewObject = new AuctionPreviewObject
-    (0,"/assets/images/pexels-photo-277460.jpeg","Auction0", new Date, "Pocket Watch");
+    let description1 = "Placeholder Description for the Pocket Watch asd fgh jkl zxc cbcvb"
 
-    let details1:BiddingDetails = new BiddingDetails
-    ("Placeholder Description for the Pocket Watch asd fgh jkl zxc cbcvb",40,1000)
+    let auction1 = new AuctionObject(0,"","Auction0", new Date, new Date, "Pocket Watch",
+    description1,40,1000,"user")
+    let auction2 = new AuctionObject(1,"","Gold Necklace", new Date, new Date, "Jewelry",
+    description1,40,1000,"user1")
 
-    let auction1 = new AuctionDetails(preview1,details1);
+    let image = "/9j/4QAYRXhpZgAASUkqAAgAAAAAAAAAAAAAAP/sABFEdWNreQABAAQAAAAJAAD/4QREaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wLwA8P3hwYWNrZXQgYmVnaW49Iu+7vyIgaWQ9Ilc1TTBNcENlaGlIenJlU3pOVGN6a2M5ZCI/PiA8eDp4bXBtZXRhIHhtbG5zOng9ImFkb2JlOm5zOm1ldGEvIiB4OnhtcHRrPSJBZG9iZSBYTVAgQ29yZSA1LjAtYzA2MSA2NC4xNDA5NDksIDIwMTAvMTIvMDctMTA6NTc6MDEgICAgICAgICI+IDxyZGY6UkRGIHhtbG5zOnJkZj0iaHR0cDovL3d3dy53My5vcmcvMTk5OS8wMi8yMi1yZGYtc3ludGF4LW5zIyI+IDxyZGY6RGVzY3JpcHRpb24gcmRmOmFib3V0PSIiIHhtbG5zOnhtcE1NPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvbW0vIiB4bWxuczpzdFJlZj0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL3NUeXBlL1Jlc291cmNlUmVmIyIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczpkYz0iaHR0cDovL3B1cmwub3JnL2RjL2VsZW1lbnRzLzEuMS8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo4N0I1QkU5NUQ2RTVERjExQjFENEFGM0ZEMDAyNUQ3MCIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDozMTE0N0EwRUQ0MjkxMUUxODg3RUIyRTM3MUU1MkQ1QSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDozMTE0N0EwREQ0MjkxMUUxODg3RUIyRTM3MUU1MkQ1QSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M0IFdpbmRvd3MiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDpFQUE3Qjg2QkMyM0RFMDExQTVFM0NFQjJEQjgwOTg0NyIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDo4N0I1QkU5NUQ2RTVERjExQjFENEFGM0ZEMDAy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"
 
-    let preview2:AuctionPreviewObject = new AuctionPreviewObject
-    (1,"/assets/images/pexels-photo-277460.jpeg","Gold Necklace", new Date, "Jewelry");
+    let auction3 = new AuctionObject(1,image,"Gold Necklace", new Date, new Date, "Jewelry",
+    description1,40,1000,"user1")
 
-    preview2.date.setSeconds(preview2.date.getSeconds() + 20);
-
-    let auction2 = new AuctionDetails(preview2,this.deepCopy(details1));
-
-    this.auctions.push(auction1);
-    this.auctions.push(auction2);
-
-  }
-
-  public getAuctionPreviews() : AuctionPreviewObject[]
-  {
-    let result:AuctionPreviewObject[] = [];
-    for(let i = 0; i<this.auctions.length;i=i+1)
-    {
-      result.push(this.auctions[i].auctionPreview);
-    }
-
-    return result;
+    auction1.incrementExpectedEnd()
+    auction1.incrementExpectedEnd()
+    auction2.incrementExpectedEnd()
+    this.auctions.push(auction1)
+    this.auctions.push(auction2)
+    this.auctions.push(auction3)
   }
 }

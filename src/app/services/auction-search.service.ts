@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { AuctionPreviewObject } from '../objects/AuctionPreviewObject';
+import { AuctionObject } from '../objects/AuctionObject';
 
 @Injectable({
   providedIn: 'root'
@@ -8,14 +8,14 @@ export class AuctionSearchService {
 
   constructor() { }
 
-  auctionSearched(auction:AuctionPreviewObject, parameter:string)
+  auctionSearched(auction:AuctionObject, parameter:string)
   {
     return auction.title.includes(parameter) || auction.category.includes(parameter);
   }
 
-  getSearchedAuctions(auctions: AuctionPreviewObject[], parameter:string) : AuctionPreviewObject[]
+  getSearchedAuctions(auctions: AuctionObject[], parameter:string) : AuctionObject[]
   {
-    let result : AuctionPreviewObject[] = [];
+    let result : AuctionObject[] = [];
 
     for(let i = 0;i<auctions.length;i++)
     {

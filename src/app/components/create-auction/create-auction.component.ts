@@ -1,6 +1,9 @@
 import { HttpClientService } from 'src/app/services/http-client.service';
 import { Component, OnInit } from '@angular/core';
 import { WindowToggleService } from 'src/app/services/window-toggle.service';
+import { LoginService } from 'src/app/services/login.service';
+import { AuctionObject } from 'src/app/objects/AuctionObject';
+
 
 @Component({
   selector: 'app-create-auction',
@@ -9,19 +12,14 @@ import { WindowToggleService } from 'src/app/services/window-toggle.service';
 })
 export class CreateAuctionComponent implements OnInit {
 
-  auction_title:string="";
-  starting_price:string="";
-  timeout:string = "";
-  category:string = "";
-  item_description:string = "";
-  start_date = "";
+  public auction : AuctionObject = AuctionObject.createEmpty();
   posts : any;
-  image_as_base64:string = "";
 
-  constructor(private httpService: HttpClientService, private windowToggle : WindowToggleService) { }
-
+  constructor(private httpService: HttpClientService,
+              private loginService : LoginService,
+              private windowToggle : WindowToggleService) 
+  {}
   ngOnInit(): void {
-    
   }
 
   handleFileSelect(imageInput: any){
@@ -37,18 +35,19 @@ export class CreateAuctionComponent implements OnInit {
 
   _handleReaderLoaded(readerEvt: any) {
     var binaryString = readerEvt.target.result;
-    this.image_as_base64= btoa(binaryString);
+    this.auction.image= btoa(binaryString); //Image as Base64
   }
 
   create_auction(): void {
-    this.httpService.post(  {
-      auction_title: this.auction_title, 
-      starting_price: this.starting_price,
-      timeout: this.timeout,
-      category: this.category,
-      start_date: this.start_date,
-      item_description: this.item_description,
-      image: this.image_as_base64, action: 'create_auction'}, 
+    this.auction.resetDate(this.auction.date);
+    this.auction.resetExpectedEnd(this.auction.date);
+    this.auction.owner = this.loginService.getUser()!;
+
+    console.log(this.auction);
+    this.httpService.post(
+      {
+      auction: this.auction,
+      action: 'create_auction'}, 
         'http://192.168.0.192:80/Auction-App/index.php').subscribe(
           (response) => { this.posts = response; 
             console.log(response);

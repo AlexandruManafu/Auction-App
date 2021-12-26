@@ -29,5 +29,5 @@ function logout() {
 function isLogged() {
     if (entry_exists('logged_users.json', $_SERVER['REMOTE_ADDR']))
         echo 'yes';
-    else echo 'no';
+else echo 'no';
 }
