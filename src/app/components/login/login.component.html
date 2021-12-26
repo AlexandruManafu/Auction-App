@@ -2,7 +2,7 @@
     <form id="loginForm" (ngSubmit)="login()" #loginForm="ngForm">
         <div class="padding_bottom">
             <p id="welcome">
-                Login
+                {{action}}
             </p>
         </div>
         <div class='padding_bottom'>
@@ -10,6 +10,9 @@
         </div>
         <div class='padding_bottom'>
             <input [(ngModel)]="password" type="password" name="password" class="inputs" placeholder="password" required>
+        </div>
+        <div class='padding_bottom'>
+            <a href="#" (click)="switchToRegister()">{{switch_text}}</a>
         </div>
         <div class='padding_bottom'>
             <input type="submit" name="submit" placeholder="submit">
