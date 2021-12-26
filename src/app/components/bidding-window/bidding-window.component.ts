@@ -1,7 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { AuctionDetails } from 'src/app/objects/AuctionDetails';
-import { AuctionPreviewObject } from 'src/app/objects/AuctionPreviewObject';
+import { AuctionObject } from 'src/app/objects/AuctionObject';
 import { AuctionSelectService } from 'src/app/services/auction-select.service';
 import { BiddingService } from 'src/app/services/bidding.service';
 
@@ -15,7 +14,7 @@ export class BiddingWindowComponent implements OnInit,OnDestroy {
   constructor(private auctionSelect:AuctionSelectService,
               private bidding:BiddingService) { }
   
-  public targetAuction! : AuctionDetails;
+  public targetAuction! : AuctionObject;
 
   public canBid : boolean = this.bidding.canBid;
 
@@ -27,7 +26,7 @@ export class BiddingWindowComponent implements OnInit,OnDestroy {
 
   ngOnInit(): void {
     this.targetAuction = this.auctionSelect.getTargetAuction()!;
-    this.minimumBid = this.targetAuction.biddingDetails.initialBid;
+    this.minimumBid = this.targetAuction.initialBid;
     this.bidding.changeCurrentAmount(this.minimumBid);
 
     this.subscribeForChanges();
@@ -46,15 +45,15 @@ export class BiddingWindowComponent implements OnInit,OnDestroy {
 
   validBid()
   {
-    let amount = this.targetAuction.biddingDetails.initialBid
+    let amount = this.targetAuction.initialBid
     let twoPercentIncrease = amount + amount/50
     return this.canBid && this.bidAmount >= twoPercentIncrease;
   }
 
   onBid()
   {
-    this.targetAuction.biddingDetails.initialBid = this.bidAmount;
-    this.targetAuction.updateExpectedEnd(new Date);
+    this.targetAuction.initialBid = this.bidAmount;
+    this.targetAuction.resetExpectedEnd(new Date);
     this.bidding.changeCurrentAmount(this.bidAmount);
     console.log(this.minimumBid);
   }

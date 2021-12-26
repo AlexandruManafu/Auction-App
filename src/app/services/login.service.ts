@@ -45,6 +45,11 @@ export class LoginService {
     localStorage.setItem("user",  user);
   }
 
+  public getUser() : string | null
+  {
+    return localStorage.getItem("user");
+  }
+
   public unsetUser(): void
   {
     localStorage.removeItem("user");
@@ -52,10 +57,10 @@ export class LoginService {
 
   public isLoggedInLocal(): boolean
   {
-    let result = localStorage.getItem("user") 
-    return result != null;
+    return this.getUser() != null;
   }
 
+  /*
   public isLoggedInRemote() : boolean
   {
     let result:boolean = false;
@@ -72,4 +77,17 @@ export class LoginService {
 
     return result;
   }
+  */
+
+  
+  public isLoggedInRemote() : void
+  {
+    this.httpService.get(
+     'http://192.168.0.192:80/Auction-App/index.php?action=isLogged',true).subscribe(
+        (response) => { 
+          console.log(response);
+        },
+        (error) => { console.log(error); });
+  }
+  
 }

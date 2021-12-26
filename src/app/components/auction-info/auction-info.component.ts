@@ -1,5 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { AuctionDetails } from 'src/app/objects/AuctionDetails';
+import { Component, OnInit } from '@angular/core';
+import { AuctionObject } from 'src/app/objects/AuctionObject';
 import { AuctionSelectService } from 'src/app/services/auction-select.service';
 
 @Component({
@@ -10,9 +10,9 @@ import { AuctionSelectService } from 'src/app/services/auction-select.service';
 export class AuctionInfoComponent implements OnInit {
 
   
-  constructor(private auctionSelect : AuctionSelectService) { }
+  constructor(public auctionSelect : AuctionSelectService) { }
 
-  auctionObject : AuctionDetails | undefined = this.auctionSelect.getTargetAuction();
+  auctionObject : AuctionObject | undefined = this.auctionSelect.getTargetAuction();
 
   ngOnInit(): void {
   }

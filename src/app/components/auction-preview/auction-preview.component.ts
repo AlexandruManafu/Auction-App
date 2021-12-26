@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { AuctionObject } from 'src/app/objects/AuctionObject';
 import { AuctionPreviewObject } from 'src/app/objects/AuctionPreviewObject';
 import { AuctionSelectService } from 'src/app/services/auction-select.service';
 import { WindowToggleService } from 'src/app/services/window-toggle.service';
@@ -10,9 +11,9 @@ import { WindowToggleService } from 'src/app/services/window-toggle.service';
 })
 export class AuctionPreviewComponent implements OnInit {
 
-  @Input() previewObject?: AuctionPreviewObject = undefined;
+  @Input() previewObject?: AuctionObject = undefined;
 
-  constructor(private auctionSelect:AuctionSelectService,
+  constructor(public auctionSelect:AuctionSelectService,
               private windowToggle: WindowToggleService) { }
 
   ngOnInit(): void {

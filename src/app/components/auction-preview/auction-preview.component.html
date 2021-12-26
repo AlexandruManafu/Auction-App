@@ -1,5 +1,6 @@
 <div *ngIf="this.previewObject != undefined" class="auctionBorder" (click) = "selectAuction()">
-    <img class="auctionImage" src = {{previewObject.imagePath}}>
+    <img *ngIf="this.previewObject.image.length == 0" class="auctionImage" 
+    src = {{this.auctionSelect.placeholderImagePath}}>
     <p class="auctionTitle">{{previewObject.title}}</p>
-    <p class="auctionDate">{{previewObject.date}}</p>
+    <p class="auctionDate">{{previewObject.date | date:'mediumDate'}} {{previewObject.date | date:'shortTime'}}</p>
 </div>

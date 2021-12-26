@@ -1,5 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { AuctionDetails } from 'src/app/objects/AuctionDetails';
+import { Component, OnInit } from '@angular/core';
+import { AuctionObject } from 'src/app/objects/AuctionObject';
 import { AuctionSelectService } from 'src/app/services/auction-select.service';
 import { BiddingService } from 'src/app/services/bidding.service';
 
@@ -14,7 +14,7 @@ export class BiddingTimeoutComponent implements OnInit {
   constructor(private auctionSelect: AuctionSelectService,
               private bidding: BiddingService) { }
 
-  private auction : AuctionDetails = this.auctionSelect.getTargetAuction()!;
+  private auction : AuctionObject = this.auctionSelect.getTargetAuction()!;
   public count:number = 0;
   public auctionContinuing = true;
 

@@ -2,15 +2,21 @@
 require_once('model/auction.php');
 
 
-function  createAuction($auction_title, $starting_price, $start_date, $timeout, $category, $item_description, $image) {
+function  createAuction($auction) {
     $path = '';
-    if ($image != '') {
-        $path = getPath($auction_title, $category);
-        uploadFile($image, $path);
+    if ($auction["image"] != '') {
+        $path = getPath($auction["title"], $auction["category"]);
+        uploadFile($auction["image"], $path);
     }
-    $date = new DateTime($start_date);
-    $auction = new Auction($auction_title, $starting_price, $start_date, $timeout, $category,  $item_description, $path);
+
+    $auction = new Auction($path,$auction["title"],$auction["date"],$auction["expectedEnd"],$auction["category"],$auction["description"],
+                            $auction["timeout"],$auction["initialBid"],$auction["owner"]);
     $auction->saveAuction();
+}
+
+function getAuctions()
+{
+    return Auction::getAuctions();
 }
 
 function loadAuction($auction_title) {
