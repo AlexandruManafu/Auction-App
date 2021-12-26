@@ -1,6 +1,7 @@
 <div *ngIf="this.previewObject != undefined" class="auctionBorder" (click) = "selectAuction()">
     <img *ngIf="this.previewObject.image.length == 0" class="auctionImage" 
     src = {{this.auctionSelect.placeholderImagePath}}>
+    <img *ngIf="this.previewObject.image.length > 0" src={{image}}/>
     <p class="auctionTitle">{{previewObject.title}}</p>
     <p class="auctionDate">{{previewObject.date | date:'mediumDate'}} {{previewObject.date | date:'shortTime'}}</p>
 </div>

@@ -100,7 +100,8 @@ class Database {
 		(
 			id int(10) PRIMARY KEY AUTO_INCREMENT NOT NULL,
 			username VARCHAR(128) NOT NULL,
-			password VARCHAR(128) NOT NULL
+			password VARCHAR(128) NOT NULL,
+            money int(10) DEFAULT 0
 		);";
 		$sql .= "CREATE TABLE auction
 		(

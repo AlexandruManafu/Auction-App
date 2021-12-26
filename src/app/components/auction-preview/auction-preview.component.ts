@@ -12,11 +12,13 @@ import { WindowToggleService } from 'src/app/services/window-toggle.service';
 export class AuctionPreviewComponent implements OnInit {
 
   @Input() previewObject?: AuctionObject = undefined;
+  image : string = "data:image/png;base64,";
 
   constructor(public auctionSelect:AuctionSelectService,
               private windowToggle: WindowToggleService) { }
 
   ngOnInit(): void {
+    this.image += this.previewObject?.image;
   }
 
   selectAuction():void
