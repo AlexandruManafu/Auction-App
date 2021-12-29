@@ -8,16 +8,18 @@
 
         <tr>
             <td  colspan="3"  class="label">Money: {{money}}</td>
-            <td  colspan="1" ><button>+</button></td>
+            <td  colspan="1" ><button (click) = "isMoneyDivVisible = isMoneyDivVisible?false:true">+</button></td>
         </tr>
         <tr><td><br></td></tr>
-        <tr>
-            <td colspan="2"><input type="text" placeholder="Add money"></td>
-            <td colspan="2"><input type="submit" value="Add" id="add_money"></td>
-        </tr>
+        <div *ngIf="this.isMoneyDivVisible" id="add_money_div">
+            <form id="add_money_form" (ngSubmit)="add_money()" #add_money_form="ngForm">
+                <td colspan="2"><input name="money_to_add" type="text" placeholder="Add money" [(ngModel)]="money_to_add"></td>
+                <td colspan="2"><input type="submit" value="Add" id="add_money"></td>
+            </form>
+        </div>
         <tr><td><br></td></tr>
         <tr *ngFor="let auctions of auctionsMatrix">
-            <td *ngFor="let element of auctions" colspan="4"> 
+            <td *ngFor="let element of auctions" colspan="2"> 
                 <app-auction-preview  [previewObject]="element"></app-auction-preview>
             </td>
         </tr>

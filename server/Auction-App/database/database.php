@@ -17,11 +17,23 @@ class Database {
         if ($this->conn->query($query) === TRUE) {
             echo "New record created successfully";
         } else {
-            echo "Error: " . $sql . "<br>" . $conn->error;
+            echo "Error: " . $query . "<br>" . $this->conn->error;
         }
-            
     }
 
+    function query($query, $parameters) {
+        if(!$this->is_connected)
+            $this->connect();
+        foreach ($parameters as $parameter) {
+            $query = $this->replaceFirst($query, '?', $parameter);
+        }
+
+        if ($this->conn->query($query) === TRUE) {
+            echo "Record updated successfully";
+        } else {
+            echo "Error: " . $query . "<br>" . $this->conn->error;
+        }
+    }
     function exists($tablename, $fields, $parameters) {
         if(!$this->is_connected)
             $this->connect();

@@ -6,3 +6,13 @@ table {
 table #add_money {
     width: 90%;
 }
+
+#panel {
+    width: fit-content;
+}
+
+#add_money_div {
+    width: 100%;
+    display: block;
+    margin: 0;
+}

@@ -16,6 +16,41 @@ class User {
         $db->close();
     }
 
+    public static function getMoney($username) {
+        $db = new Database();
+        $result = $db->select('user', 'username', $username);
+        $db->close();
+        return $result['money'];
+    }
+
+    public static function add_money($money, $username) {
+        $db = new Database();
+        $sum = intval($money);
+
+        if(getMoney($username) != '0') {
+            $sum += intval(self::getMoney($username));
+        }
+        $query = "UPDATE user SET money = '?' WHERE username = '?';";
+        $result = $db->query($query, array($sum, $username));
+        $db->close();
+    }
+
+    public static function substract_money($money, $username) {
+        $db = new Database();
+        $diff = intval(self::getMoney($username));
+
+        if($diff > intval($money)) {
+            $diff -= intval($money);
+        }
+        else {
+            echo "Not enough money";
+            return;
+        }
+        $query = "UPDATE user SET money = '?' WHERE username = '?';";
+        $result = $db->query($query, array($diff, $username));
+        $db->close();
+    }
+
     public function exists() {
         $db = new Database();
 
