@@ -26,6 +26,9 @@ if(!is_null($data))
 		case 'create_auction':
 			createAuction($data['auction']);
 			break;
+		case 'addMoney':
+			add_money($data['money'], $data['username']);
+			break;
 	}
 }
 else
@@ -43,7 +46,10 @@ else
 		case 'getAuctions':
 			getAuctions();
 			break;
-		
+		case 'getMoney':
+			$user = $_GET['user'];
+			getMoney($user);
+			break;
 	}
 	
 }

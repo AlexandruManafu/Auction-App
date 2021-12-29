@@ -31,18 +31,22 @@ export class AuctionSelectService {
 
   overrideTargetAuction(newAuction:AuctionObject): void
   {
+   
     let auctions : AuctionObject[] = this.auctionMock.auctions;
     for(let i = 0 ; i<auctions.length;i=i+1)
     {
       if(auctions[i].id == this.targetAuctionId)
         auctions[i] = newAuction;
     }
+
+    console.log(auctions);
   }
 
   getRemoteAuctions()
   {
+    let auctions : AuctionObject[] = this.auctionMock.auctions;
     this.httpService.get(
-      'http://192.168.0.192:80/Auction-App/index.php?action=getAuctions',false).subscribe(
+      'http://127.0.0.1:80/Auction-App/index.php?action=getAuctions',false).subscribe(
          (response) => { 
            console.log(response);
          },

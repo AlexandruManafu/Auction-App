@@ -48,7 +48,7 @@ export class CreateAuctionComponent implements OnInit {
       {
       auction: this.auction,
       action: 'create_auction'}, 
-        'http://192.168.0.192:80/Auction-App/index.php').subscribe(
+        'http://.127.0.0.1:80/Auction-App/index.php').subscribe(
           (response) => { this.posts = response; 
             console.log(response);
           },

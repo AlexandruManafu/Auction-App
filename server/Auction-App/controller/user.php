@@ -21,9 +21,17 @@ function login($username, $password) {
     }
 }
 
+function getMoney($username) {
+    echo User::getMoney($username);
+}
+
 function logout() {
 	echo "here";
     logOutFromCache('logged_users.json', $_SERVER['REMOTE_ADDR']);
+}
+
+function add_money($money, $username) {
+    User::add_money($money, $username);
 }
 
 function isLogged() {
