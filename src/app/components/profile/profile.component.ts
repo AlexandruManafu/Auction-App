@@ -1,63 +1,50 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { AuctionObject } from 'src/app/objects/AuctionObject';
-import { AuctionMockService } from 'src/app/services/auction-mock.service';
-import { HttpClientService } from 'src/app/services/http-client.service';
+import { AuctionSelectService } from 'src/app/services/auction-select.service';
 import { LoginService } from 'src/app/services/login.service';
-import { WindowToggleService } from 'src/app/services/window-toggle.service';
 
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.css']
 })
-export class ProfileComponent implements OnInit {
+export class ProfileComponent implements OnInit, OnDestroy {
 
   constructor(private loginService: LoginService,
-              private auctionMock : AuctionMockService,
-              private httpService: HttpClientService
+              private auctionSelect : AuctionSelectService
               ) { }
-
+  
   isMoneyDivVisible = false;
-  username = this.loginService.getUser();
-  money = "0";
+  username = this.loginService.getUser()
+  money = "";
   money_to_add = "";
-  auctionsMatrix : AuctionObject[][] = [];
+  moneySub! : Subscription
+  auctions : AuctionObject[] = []
+
   ngOnInit(): void {
-    this.money = this.loginService.money
-    this.auctionsMatrix = this.makeMatrix(this.auctionMock.auctions)
+    this.auctions  = this.auctionSelect.getOwnedAuctions(this.username!)
+    this.loginService.get_money(this.username)
+
+    this.subscribeForChanges()
+  }
+  ngOnDestroy(): void {
+    this.moneySub.unsubscribe()
   }
 
-  makeMatrix(auctions : AuctionObject[]) : AuctionObject[][]
+  subscribeForChanges()
   {
-    let result : AuctionObject[][] = [];
-    let counter = -1;
-    for(let i = 0; i < auctions.length; i++)
-    {
-      if (i % 2 == 0) {
-        result.push([]);
-        counter++;
-      }
-      result[counter].push(auctions[i]);
-    }
-    return result;
+    this.moneySub = this.loginService.moneyMessage.subscribe(message => this.money = message)
   }
-
-  send_money(money: string, username: string|null) {
-    this.httpService.post({money: money, username: username, action: 'addMoney'},
-    'http://127.0.0.1:80/Auction-App/index.php').subscribe(
-       (response) => { 
-         console.log(response);
-       },
-       (error) => { console.log(error); });
- }
 
   add_money() {
     if (!isNaN(parseInt(this.money_to_add))) {
-      this.money = (parseInt(this.money) + parseInt(this.money_to_add)).toString();
-      this.send_money(this.money_to_add, this.username);
-      console.log(this.loginService.money);
+      this.loginService.sendMoney(this.money_to_add, this.username).subscribe(
+        (response) => { 
+          console.log(response);
+          this.loginService.get_money(this.username)
+        });;
     }
-    this.money_to_add = "";
   }
 
 }

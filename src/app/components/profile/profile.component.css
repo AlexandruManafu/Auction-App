@@ -1,18 +1,60 @@
 table {
     width: 100%;
-    text-align: center;
     font-size: larger;
+    text-align: center;
 }
 table #add_money {
     width: 90%;
 }
 
 #panel {
-    width: fit-content;
+    width:90%;
+    padding-top: 3ex;
+    padding-right: 5ex;
+    padding-left: 5ex;
+    padding-bottom: 3ex;
+}
+
+#rightMargin{
+    display: inline;
+    width: 15%;
 }
 
 #add_money_div {
+    margin-left: -10ex;
     width: 100%;
+    display: inline;
+    position : absolute;
+}
+
+.highResolution{
     display: block;
-    margin: 0;
+}
+.lowResolution{
+    display: none;
+}
+
+#auctionsContainer{
+    width: 60%;
+    margin-left: 25%;
+}
+
+@media screen and (max-width: 600px) {
+    .lowResolution{
+        display: block;
+    }
+    table{
+        text-align: center;
+        width: 400px;
+    }
+    tr{
+        margin-left: 20ex;
+    }
+    #panel{
+        padding-left: 2ex;
+        padding-right: 2ex;
+    }
+    .highResolution{
+        display: none;
+    }
 }

@@ -29,6 +29,9 @@ if(!is_null($data))
 		case 'addMoney':
 			add_money($data['money'], $data['username']);
 			break;
+		case 'bid':
+			bid($data);
+			break;
 	}
 }
 else
@@ -49,6 +52,10 @@ else
 		case 'getMoney':
 			$user = $_GET['user'];
 			getMoney($user);
+			break;
+		case 'getBiddingInfo':
+			$auctionId = $_GET["auctionId"];
+			getBiddingInfo($auctionId);
 			break;
 	}
 	

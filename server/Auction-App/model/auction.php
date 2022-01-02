@@ -70,6 +70,34 @@ class Auction {
         $db->close();
     }
 
+    public static function getBiddingInfo($auctionId)
+    {
+        $db = new Database();
+        $result = [];
+        $auction = $db->select("auction","id",$auctionId);
+
+        $result[0] = $auction["expectedEnd"];
+        $result[1] = $auction["initialBid"];
+        $result[2] = $auction["owner"];
+        echo json_encode($result);
+        $db->close();
+    }
+
+    public static function bid($data)
+    {
+        $db = new Database();
+
+        $sql = "Update auction
+                SET initialBid = ?,
+                owner = '?',
+                expectedEnd = '?'
+                WHERE id = ? ;";
+        $values = [$data["initialBid"], $data["owner"] ,$data["expectedEnd"], $data["id"]];
+        $db->query($sql,$values);
+
+        $db->close();
+    }
+
     public function getFieldsAsArray()
     {
         return array($this->image, $this->title, $this->date, $this->expectedEnd,

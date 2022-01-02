@@ -1,6 +1,7 @@
 .auctionImage{
     width: 100%;
     height: 25ex;
+    object-fit: contain;
 }
 .auctionTitle{
     font-weight:normal;
@@ -22,4 +23,12 @@
     margin-right: 5ex;
     margin-top: 5ex;
     display: inline-block;
+}
+.auctionInvisible{
+    display: block;
+    border: 0ex solid white;
+    width: 30ex;
+    border-radius: 3px;
+    margin-right: 5ex;
+    margin-top: 5ex;
 }

@@ -1,6 +1,7 @@
 .auctionImage{
     width: 100%;
     height: 40ex;
+    object-fit: contain;
 }
 .auctionTitle{
     font-weight:normal;

@@ -1,6 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { AuctionObject } from 'src/app/objects/AuctionObject';
-import { AuctionPreviewObject } from 'src/app/objects/AuctionPreviewObject';
 import { AuctionSelectService } from 'src/app/services/auction-select.service';
 import { WindowToggleService } from 'src/app/services/window-toggle.service';
 
@@ -26,6 +25,7 @@ export class AuctionPreviewComponent implements OnInit {
     if(this.previewObject != undefined)
     {
       this.auctionSelect.targetAuctionId = this.previewObject.id;
+      this.auctionSelect.changeTargetAuction(this.previewObject)
       this.windowToggle.setWhatToDisplay("Bidding");
     }
   }
