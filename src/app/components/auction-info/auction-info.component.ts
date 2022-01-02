@@ -9,12 +9,14 @@ import { AuctionSelectService } from 'src/app/services/auction-select.service';
 })
 export class AuctionInfoComponent implements OnInit {
 
-  
+  image : string = "data:image/png;base64,";
   constructor(public auctionSelect : AuctionSelectService) { }
 
   auctionObject : AuctionObject | undefined = this.auctionSelect.getTargetAuction();
 
   ngOnInit(): void {
+    if(this.auctionObject!)
+      this.image += this.auctionObject.image;
   }
 
 }

@@ -19,6 +19,16 @@ function getAuctions()
     return Auction::getAuctions();
 }
 
+function getBiddingInfo($auctionId)
+{
+    return Auction::getBiddingInfo($auctionId);
+}
+
+function bid($data)
+{
+    return Auction::bid($data);
+}
+
 function loadAuction($auction_title) {
     $auction = new Auction($auction_title);
     $auction->loadAuction();

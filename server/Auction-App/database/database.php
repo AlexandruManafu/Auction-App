@@ -21,6 +21,13 @@ class Database {
         }
     }
 
+    function replaceFirst($haystack, $needle, $replace) {
+        $pos = strpos($haystack, $needle);
+        if ($pos !== false) 
+            return substr_replace($haystack, $replace, $pos, strlen($needle));
+        return $haystack;
+    }
+
     function query($query, $parameters) {
         if(!$this->is_connected)
             $this->connect();
@@ -91,13 +98,6 @@ class Database {
         $this->conn->close();
         $this->is_connected = false;
     }
-
-    function replaceFirst($haystack, $needle, $replace) {
-        $pos = strpos($haystack, $needle);
-        if ($pos !== false) 
-            return substr_replace($haystack, $replace, $pos, strlen($needle));
-        return $haystack;
-    }
 	
 	function isDbEmpty()
 	{
@@ -106,7 +106,7 @@ class Database {
 		return $result == 0;
 	}
 
-	function createDefualtTables()
+	function createDefaultTables()
 	{
 		$sql = "CREATE TABLE user
 		(
@@ -140,7 +140,7 @@ class Database {
 			
         if($this->isDbEmpty())
 		{
-			$this->createDefualtTables();
+			$this->createDefaultTables();
 		}
     }
 	

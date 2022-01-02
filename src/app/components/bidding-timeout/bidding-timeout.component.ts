@@ -39,6 +39,7 @@ export class BiddingTimeoutComponent implements OnInit {
   // is the integer part of expectedEnd - currentTime / 1000
   processCount()
   {
+    this.bidding.updateAuctionRemote(this.auction);
     console.log(this.count);
     if(this.count < 0)
     {
@@ -61,7 +62,6 @@ export class BiddingTimeoutComponent implements OnInit {
   {
     setTimeout(
       ()=>{
-      
       this.processCount();
     }, 1000) //Every second execute above
   }

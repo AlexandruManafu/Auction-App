@@ -1,5 +1,6 @@
+import { ThisReceiver } from '@angular/compiler';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { HttpClientService } from './http-client.service';
 import { NavigationService } from './navigation.service';
 
@@ -8,63 +9,85 @@ import { NavigationService } from './navigation.service';
 })
 export class LoginService {
 
-  public money = "0"
+  constructor(private navigation: NavigationService,
+    private httpService: HttpClientService) {
 
-  constructor(private navigation:NavigationService,
-              private httpService: HttpClientService) { }
+    if(this.user!)
+      this.get_money(this.user)
 
-  public login(username : string, password : string) {
-    let posts:any;
-    this.httpService.post({username: username, password: password, action: 'login'},
-     'http://127.0.0.1:80/Auction-App/index.php').subscribe(
-        (response) => { posts = response; 
-          console.log(response);
-          this.setUser(username);
-          //this.get_money(username);
-          this.navigation.display("LoginAction");
-          this.navigation.display("Auctions");
-        },
-        (error) => { console.log(error); });
+    }
+  private user = "";
+  private money = "0"
+  private moneyMessageSource = new BehaviorSubject<string>(this.money)
+  public moneyMessage = this.moneyMessageSource.asObservable();
+
+  changeLocalMoney(message : string)
+  {
+    this.moneyMessageSource.next(message);
   }
 
   public get_money(username:string|null) {
-    console.log("username: " + username);
     this.httpService.get(
-      'http://127.0.0.1:80/Auction-App/index.php?action=getMoney&user=' + username,true).subscribe(
+    '/Auction-App/index.php?action=getMoney&user=' + username,true).subscribe(
          (response) => { 
            console.log(response);
-           this.money = response.toString();
-         },
-         (error) => { console.log(error); });
+           this.changeLocalMoney(response.toString())
+         });
+      /*
+      },
+      (error) => { console.log(error); }
+      */
   }
+
+  sendMoney(money: string, username: string|null)
+  {
+    return this.httpService.post(
+    {money: money,username: username, action: 'addMoney'},
+    '/Auction-App/index.php')
+ }
+
+ loginRegister(username:string, password:string, action:string) {
+  return this.httpService.post(
+    {
+    username: username,
+    password: password,
+    action: action.toLocaleLowerCase()
+    }, 
+      '/Auction-App/index.php')
+}
 
   public logout()
   {
     this.httpService.post({action: 'logout'},
-     'http://127.0.0.1:80/Auction-App/index.php?action=true').subscribe(
+    '/Auction-App/index.php?action=true').subscribe(
         (response) => { 
           console.log(response);
           if (response.body == 'logouthere') {
             this.unsetUser()
             this.navigation.display("Logout");
+            this.navigation.display("Auctions");
           }
-        },
-        (error) => { console.log(error); });
+        });
   }
 
   public setUser(user : string) : void
   {
+    this.user = user;
     localStorage.setItem("user",  user);
   }
 
   public getUser() : string | null
   {
-    this.get_money(localStorage.getItem("user"));
-    return localStorage.getItem("user");
+    if(this.user != "")
+      return this.user
+    else
+      return localStorage.getItem("user")
   }
+
 
   public unsetUser(): void
   {
+    this.user = "";
     localStorage.removeItem("user");
   }
 

@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { AuctionPreviewObject } from 'src/app/objects/AuctionPreviewObject';
-import { FormsModule } from '@angular/forms';
 import { AuctionMockService } from 'src/app/services/auction-mock.service';
 import { AuctionSearchService } from 'src/app/services/auction-search.service';
 import { AuctionObject } from 'src/app/objects/AuctionObject';
+import { AuctionSelectService } from 'src/app/services/auction-select.service';
 
 @Component({
   selector: 'app-auctions-window',
@@ -12,14 +11,14 @@ import { AuctionObject } from 'src/app/objects/AuctionObject';
 })
 export class AuctionsWindowComponent implements OnInit {
 
-  constructor(private auctionMock : AuctionMockService,
+  constructor(private auctionSelect : AuctionSelectService,
               private auctionSearch : AuctionSearchService ) { }
   auctions : AuctionObject[] = [];
   searchParameter: string = "";
+  refreshImage = "assets/images/refresh_2091540.png";
 
   ngOnInit(): void {
-    this.auctions = this.auctionMock.auctions
-    console.log(this.auctions[0].image.length);
+    this.auctions = this.auctionSelect.auctions
 
   }
 
@@ -28,8 +27,14 @@ export class AuctionsWindowComponent implements OnInit {
     this.auctions = this.auctionSearch.getSearchedAuctions(this.auctions,this.searchParameter);
     if(this.searchParameter.length == 0)
     {
-      this.auctions = this.auctionMock.auctions
+      this.auctions = this.auctionSelect.auctions
     }
+  }
+
+  onRefreshConfirm() : void
+  {
+    this.auctionSelect.getRemoteAuctions()
+    this.auctions = this.auctionSelect.auctions
   }
 
 }

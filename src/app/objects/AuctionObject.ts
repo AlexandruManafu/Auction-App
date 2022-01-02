@@ -17,12 +17,28 @@ export class AuctionObject{
         return new AuctionObject(0,"","",new Date,new Date,"","","","","");
     }
 
+    cantCreate()
+    {
+        let emptyInputs = this.title =="" || this.category == "" || 
+                            this.description == "" || this.timeout == "" || this.initialBid == ""
+        let rightNow = (new Date).getTime()
+        let date = new Date(this.date).getTime()
+
+        return emptyInputs || date < rightNow;
+    }
+
     static createFromJson(json : any) : AuctionObject
     {
         let date = new Date(json["date"])
         let end = new Date(json["expectedEnd"])
         return new AuctionObject(json["id"], json["image"], json["title"], date, end, json["category"], 
         json["description"], json["timeout"], json["initialBid"], json["owner"]);
+    }
+
+    static deepCopy(auction : AuctionObject) : AuctionObject
+    {
+        let obj = JSON.parse(JSON.stringify(auction))
+        return AuctionObject.createFromJson(obj);
     }
     
     resetDate(time : Date)
@@ -34,6 +50,9 @@ export class AuctionObject{
     resetExpectedEnd(time : Date):void
     {
         let newEnd = new Date (time);
+        if(typeof this.timeout == "string")
+            this.timeout = Number.parseInt(this.timeout)
+            
         newEnd.setSeconds(newEnd.getSeconds() + this.timeout)
         this.expectedEnd = newEnd
     }

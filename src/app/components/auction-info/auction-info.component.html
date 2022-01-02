@@ -1,6 +1,7 @@
 <div *ngIf="this.auctionObject != undefined" class="auctionBorder">
     <img *ngIf="this.auctionObject.image.length == 0" class="auctionImage" 
     src = {{this.auctionSelect.placeholderImagePath}}>
+    <img *ngIf="this.auctionObject.image.length > 0" class="auctionImage" src={{image}}/>
 
     <p class="auctionTitle">{{auctionObject.title}}</p>
     <p class="auctionDescription">{{auctionObject.description}}</p>
